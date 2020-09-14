@@ -12,6 +12,10 @@
         @include('livewire.create')
     @endif
 
+        <div class="mt-2">
+            <input wire:model="search" type="text" placeholder="Search posts by title..." class="form-control">
+        </div>
+
     <table class="table table-bordered mt-5">
         <thead>
         <tr>
@@ -32,6 +36,7 @@
                 <td>
                     <button wire:click="edit({{ $post->id }})" class="btn btn-primary btn-sm">Edit</button>
                     <button wire:click="delete({{ $post->id }})" class="btn btn-danger btn-sm">Delete</button>
+                    <button wire:click="export" class="btn btn-info btn-sm mt-1">Download</button>
                 </td>
             </tr>
         @endforeach

@@ -11,11 +11,16 @@ class Posts extends Component
     use WithFileUploads;
 
     public $posts, $title, $body, $post_id, $file;
+
     public $updateMode = false;
+
+    public $search;
+
+    protected $queryString = ['search'];
 
     public function render()
     {
-        $this->posts = Post::orderBy('created_at', 'desc')->get();
+        $this->posts = Post::where('title', 'like', '%'.$this->search.'%')->get();
         return view('livewire.posts');
     }
 
@@ -82,4 +87,10 @@ class Posts extends Component
         Post::find($id)->delete();
         session()->flash('message', 'Post Deleted Successfully.');
     }
+
+    public function export()
+    {
+        return response()->download(storage_path('app/public/file/'.'7LrQAFKxQGoNerH5LHzEipA4RDuaC3Uq5lM1AUFB.jpeg'));
+    }
+
 }
