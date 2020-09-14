@@ -19,6 +19,10 @@
         @error('file') <span class="text-danger">{{ $message }}</span>@enderror
     </div>
 
+    <div class="form-group">
+        <img src="{{ url('storage/'.$file) }}" height="150" width="150">
+    </div>
+
     <button wire:click.prevent="update()" class="btn btn-dark">Update</button>
     <button wire:click.prevent="cancel()" class="btn btn-danger">Cancel</button>
 </form>
