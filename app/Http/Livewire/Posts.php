@@ -3,11 +3,15 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 use Livewire\Component;
 
 class Posts extends Component
 {
-    public $posts, $title, $body, $post_id;
+    use WithFileUploads;
+
+    public $posts, $title, $body, $post_id, $file;
     public $updateMode = false;
 
     public function render()
@@ -20,6 +24,7 @@ class Posts extends Component
     {
         $this->title = '';
         $this->body = '';
+        $this->file = '';
     }
 
     public function store()
@@ -27,7 +32,12 @@ class Posts extends Component
         $validatedData = $this->validate([
             'title' => 'required',
             'body' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,svg,jpg,gif|max:1024',
         ]);
+
+        $filename = $this->file->store('file','public');
+
+        $validatedData['file'] = $filename;
 
         Post::create($validatedData);
 
@@ -42,6 +52,7 @@ class Posts extends Component
         $this->post_id = $id;
         $this->title = $post->title;
         $this->body = $post->body;
+        $this->file = $post->file;
 
         $this->updateMode = true;
     }
@@ -58,6 +69,7 @@ class Posts extends Component
         $post->update([
             'title' => $this->title,
             'body' => $this->body,
+            'file' => $this->file->store('file','public'),
         ]);
 
         $this->updateMode = false;

@@ -9,8 +9,14 @@
 
     <div class="form-group">
         <label>Body:</label>
-        <textarea type="email" class="form-control" wire:model="body"></textarea>
+        <textarea rows="5" class="form-control" wire:model="body"></textarea>
         @error('body') <span class="text-danger">{{ $message }}</span>@enderror
+    </div>
+
+    <div class="form-group">
+        <label>File:</label>
+        <input type="file" class="form-control" wire:model="file">
+        @error('file') <span class="text-danger">{{ $message }}</span>@enderror
     </div>
 
     <button wire:click.prevent="update()" class="btn btn-dark">Update</button>

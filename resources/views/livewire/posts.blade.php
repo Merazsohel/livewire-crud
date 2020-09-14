@@ -18,6 +18,7 @@
             <th>No.</th>
             <th>Title</th>
             <th>Body</th>
+            <th>Photo</th>
             <th width="150px">Action</th>
         </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->body }}</td>
+                <td> <img src="{{ url('storage/'.$post->file) }}" width="150px" height="150px" alt="No Image"/></td>
                 <td>
                     <button wire:click="edit({{ $post->id }})" class="btn btn-primary btn-sm">Edit</button>
                     <button wire:click="delete({{ $post->id }})" class="btn btn-danger btn-sm">Delete</button>
