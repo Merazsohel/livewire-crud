@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Livewire\Component;
 
@@ -16,7 +15,7 @@ class Posts extends Component
 
     public function render()
     {
-        $this->posts = Post::all();
+        $this->posts = Post::orderBy('created_at', 'desc')->get();
         return view('livewire.posts');
     }
 

@@ -25,7 +25,7 @@
         <tbody>
         @foreach($posts as $post)
             <tr>
-                <td>{{ $post->id }}</td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->body }}</td>
                 <td> <img src="{{ url('storage/'.$post->file) }}" width="150px" height="150px" alt="No Image"/></td>
